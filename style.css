@@ -1,0 +1,377 @@
+@font-face {
+  font-family: 'Exo-Regular';
+  src: url('fonts/Exo-Regular.ttf');
+}
+
+/*
+ *  Variables
+ */
+:root {
+  --dark1: 16, 16, 16;
+  --dark2: 32, 32, 32;
+  --dark3: 48, 48, 48;
+  --dark4: 64, 64, 64;
+
+  --light1: 192, 192, 192;
+  --light2: 208, 208, 208;
+  --light3: 224, 224, 224;
+  --light4: 240, 240, 240;
+
+  --blue: 0, 140, 231;
+
+  --rad-sm: 4px;
+  --rad-md: 8px;
+  --rad-lg: 16px;
+
+  --spacer-sm: 0.5em;
+  --spacer-md: 1em;
+  --spacer-lg: 2em;
+
+  --bs-sm: 0 0 4px 0;
+  --bs-md: 0 0 8px 0;
+  --bs-lg: 0 0 16px 0;
+}
+
+/*
+ *  Reset default CSS
+ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: rgb(var(--dark2));
+  color: white;
+  font: normal normal normal 1rem/1.5 'Exo-Regular';
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  color: grey;
+}
+
+button {
+  all: unset;
+
+  padding: var(--spacer-sm);
+
+  background-color: rgb(var(--light2));
+  box-shadow: var(--bs-sm) rgb(var(--dark2));
+  border-radius: var(--rad-sm);
+  color: black;
+
+  transition:
+    box-shadow 200ms ease-out,
+    transform 200ms ease-out;
+}
+
+button:hover, button:active, button:focus {
+  box-shadow: var(--bs-lg) rgb(var(--dark1));
+  cursor: pointer;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+hr {
+  height: 1px;
+  margin: var(--spacer-md) 0;
+
+  background-color: rgb(var(--light2));
+  border: 0;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+::-webkit-scrollbar-button {display: none;}
+::-webkit-scrollbar-corner {display: none;}
+::-webkit-resizer {display: none;}
+
+/*
+ *  Misc
+ */
+.f--blue {
+  color: rgb(var(--blue));
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+}
+
+.stripes {
+  background-size: 40px 40px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    transparent 75%,
+    transparent
+  );
+
+  animation: flow 2s linear infinite;
+}
+@keyframes flow {
+  from {
+    background-position: 0 0;
+  } to {
+    background-position: 80px 40px;
+  }
+}
+
+/*
+ *  App root
+ */
+.app {
+  height: 100vh;
+  width: 100vw;
+  padding: var(--spacer-md);
+
+  display: grid;
+  grid-template:
+    'user main ad-spot' auto
+    'coin-menu main ad-spot' 9fr
+    / auto 1fr auto;
+  gap: var(--spacer-md);
+}
+
+/*
+ *  User
+ */
+.user {
+  grid-area: user;
+
+  padding: var(--spacer-sm);
+
+  background-color: rgb(var(--dark3));
+  box-shadow: var(--bs-md) rgb(var(--dark2));
+}
+
+.user-stats {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-bar {
+  padding: var(--spacer-sm);
+
+  background-color: rgb(var(--dark2));
+  border-radius: var(--rad-lg);
+  box-shadow: inset var(--bs-sm) rgb(var(--dark1));
+}
+
+.user-bar__prog {
+  height: 16px;
+  width: 0;
+
+  background-color: rgb(var(--blue));
+  border-radius: var(--rad-md);
+  box-shadow: var(--bs-lg) rgb(var(--blue));
+
+  transition: width 300ms ease;
+}
+
+/*
+ *  Coin Menu
+ */
+.coin-menu {
+  grid-area: coin-menu;
+
+  width: 348px;
+
+  background-color: rgb(var(--dark3));
+  box-shadow: var(--bs-md) rgb(var(--dark2));
+  overflow-y: scroll;
+}
+
+.coin-menu::-webkit-scrollbar-track {
+  background: white;
+}
+.coin-menu::-webkit-scrollbar-track-piece {
+  background: white;
+}
+.coin-menu::-webkit-scrollbar-thumb {
+  background: rgb(var(--blue));
+}
+
+/*
+ *  Coin
+ */
+x-coin {
+  position: relative;
+  margin: var(--spacer-sm);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  background-color: rgb(var(--dark4));
+  border-radius: var(--rad-sm);
+  box-shadow: var(--bs-sm) rgb(var(--dark3));
+
+  transition:
+    box-shadow 200ms ease-in-out,
+    transform 200ms ease-in-out;
+}
+x-coin:hover {
+  box-shadow: var(--bs-lg) rgb(var(--dark2));
+  cursor: pointer;
+  transform: translateY(-1px);
+}
+x-coin:hover .coin-img {
+  transform: rotate(4deg);
+}
+
+.coin-img {
+  height: 64px;
+  width: 64px;
+  margin: var(--spacer-sm);
+
+  transition: transform 200ms ease-in-out;
+}
+
+.coin-bar {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 8px;
+
+  border-radius: var(--rad-sm);
+  opacity: 0;
+
+  transition: opacity 200ms ease-in-out;
+}
+
+/*
+ *  Main
+ */
+.main {
+  grid-area: main;
+
+  background-color: rgb(var(--dark3));
+  box-shadow: var(--bs-md) rgb(var(--dark2));
+}
+
+/*
+ *  Advertisement
+ */
+.ad-spot {
+  grid-area: ad-spot;
+
+  width: 128px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: rgb(var(--dark3));
+  box-shadow: var(--bs-md) rgb(var(--dark2));
+}
+
+/*
+ *  Coin Dashboard
+ */
+.coin-dashboard {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.coin-dashboard__aside {
+  flex-basis: 40%;
+
+  padding: var(--spacer-md);
+}
+
+.coin-dashboard__main {
+  flex-basis: 40%;
+
+  padding: var(--spacer-md);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.rewards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.claim {
+  text-align: center;
+}
+
+/*
+ *  Notifications
+ */
+.notifys {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100%;
+  width: 256px;
+  padding-bottom: var(--spacer-md);
+
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.notify {
+  margin: 1em 1em 0 1em;
+  padding: var(--spacer-sm);
+
+  background-color: rgb(var(--dark4));
+  border-radius: var(--rad-sm);
+  box-shadow: var(--bs-sm) rgb(var(--dark3));
+
+  transition:
+    box-shadow 200ms ease-in-out,
+    transform 200ms ease-in-out;
+
+  animation: slide 1000ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+@keyframes slide {
+  from {
+    transform: translate(100%);
+  } to {
+    transform: translate(0);
+  }
+}
+
+.notify:hover {
+  box-shadow: var(--bs-lg) rgb(var(--dark2));
+  cursor: pointer;
+  transform: translateY(-1px);
+}
+
+
+.link {
+  transition: color 400ms ease-in-out;
+}
+.link:hover {
+  color: white;
+}
